@@ -1,0 +1,44 @@
+html {
+    box-sizing: border-box;
+    max-height: 100vh;
+    height: 100%;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    max-height: 100vh;
+    height: 100%;
+    color: white;
+    display: grid;
+    grid-template-rows: auto 60px;
+}
+
+button, input {
+    padding: 20px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+button:disabled {
+    filter: saturate(0.5)
+}
+
+.formular>* {
+    width: 100%;
+}
+
+nav button.active {
+    background: radial-gradient(circle, rgb(104, 104, 104) 0, transparent 35px) !important;
+}
