@@ -1,7 +1,14 @@
+:root {
+  --primary-bg-color: #000000;
+  --secondary-bg-color: #222222;
+  --text-color: #ffffff;
+}
+
 html {
   box-sizing: border-box;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px;
+  color: var(--text-color);
 }
 
 *,
@@ -20,8 +27,12 @@ body {
 }
 
 header {
-  height: 100px;
-  background-color: black;
+  height: 50px;
+  background-color: var(--secondary-bg-color);
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 main {
@@ -30,10 +41,10 @@ main {
   height: 100%;
   flex-grow: 1;
   margin: 0 auto;
-  background-color: purple;
+  background-color: var(--primary-bg-color);
 }
 
 footer {
-  height: 50px;
-  background-color: violet;
+  height: 70px;
+  background-color: var(--secondary-bg-color);
 }

@@ -1,22 +1,19 @@
-import App from './App.js';
-import { clearChildren } from './FastHTML.js';
-import mainStyle from "../css/style.css" assert {type: "css"}
+import App from "./App.js";
+import { clearChildren, addChildren, changeUrlPath } from "./FastHTML.js";
+import mainStyle from "../css/style.css" assert { type: "css" };
 
 // **  IIFE: Immediately Invoked Function Expression  */
-(function () {
+(async function () {
+  document.adoptedStyleSheets = [mainStyle];
+  let page = await App();
 
-    document.adoptedStyleSheets = [mainStyle]
+  addChildren(document.body, page);
 
-    App();
-
-    window.addEventListener('rerender', function (e) {
-        if (e.detail != window.location.pathname) {
-            clearChildren(document.body)
-            App()
-        }
-        
-    });
-   
-
-
+  window.addEventListener("rerender", async function (e) {
+    if (e.detail != window.location.pathname) {
+      page = await App();
+      clearChildren(document.body);
+      addChildren(document.body, page);
+    }
+  });
 })();

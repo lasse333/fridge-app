@@ -1,20 +1,11 @@
-import { addChildren, createElement } from "./FastHTML.js";
+import { createElement, simpleRoutesAsync } from "./FastHTML.js";
 import IndexedDB from "./components/IndexedDB.js";
-import Camera, { BarcodeScanner } from "./components/Camera.js";
 import NavbarStyle from "../css/navbar.css" assert { type: "css" };
 import Navbar from "./components/Navbar.js";
+import Add from "./pages/Add.js";
+import Fridge from "./pages/Fridge.js";
 
 async function App() {
-  let camera = new Camera({
-    video: { height: 200, width: 200, facingMode: "environment" },
-  });
-  let scanner = new BarcodeScanner(camera.videoElement, "ean_13");
-  let codeOutput = createElement("p");
-  scanner.onScan = (code) => {
-    codeOutput.innerText = code;
-    scanner.stop();
-    camera.stopCamera();
-  };
   {
     let fridge = new IndexedDB("fridge", [
       { storeName: "items", dataType: "object" },
@@ -38,11 +29,39 @@ async function App() {
   let main;
   let footer;
 
-  addChildren(document.body, [
-    (header = createElement("header")),
-    (main = createElement("main", {}, [camera.videoElement, codeOutput])),
+  if (window.location.pathname == "/") {
+    window.history.pushState("", "", "/fridge");
+  }
+
+  return [
+    (header = createElement("header", {}, [
+      await simpleRoutesAsync({
+        "/fridge": function () {
+          return createElement("h1", { innerText: "Fridge" });
+        },
+        "/add": function () {
+          return createElement("h1", { innerText: "Add Item" });
+        },
+        "/settings": function () {
+          return createElement("h1", { innerText: "Settings" });
+        },
+        "/*": async () => {
+          return "hello";
+        },
+      }),
+    ])),
+    await simpleRoutesAsync({
+      "/fridge": Fridge,
+      "/add": Add,
+      "/settings": function () {
+        return createElement("div", { innerText: "settings" });
+      },
+      "/*": async () => {
+        return "hello";
+      },
+    }),
     (footer = createElement("footer", { style: NavbarStyle }, [Navbar()])),
-  ]);
+  ];
 }
 
 export default App;
