@@ -1,36 +1,39 @@
 html {
-    box-sizing: border-box;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 16px;
+  box-sizing: border-box;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
 }
 
-*, *::before, *::after {
-    box-sizing: inherit;
-    padding: 0;
-    margin: 0;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 header {
-    height: 100px;
-    background-color: black;
+  height: 100px;
+  background-color: black;
 }
 
 main {
-    max-width: 1200px;
-    width: 100%;
-    height: 100%;
-    flex-grow: 1;
-    margin: 0 auto;
-    background-color: purple;
+  max-width: 1200px;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  margin: 0 auto;
+  background-color: purple;
 }
 
 footer {
-    height: 50px;
-    background-color: violet;
+  height: 50px;
+  background-color: violet;
 }

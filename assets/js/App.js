@@ -1,6 +1,8 @@
 import { addChildren, createElement } from "./FastHTML.js";
 import IndexedDB from "./components/IndexedDB.js";
 import Camera, { BarcodeScanner } from "./components/Camera.js";
+import NavbarStyle from "../css/navbar.css" assert { type: "css" };
+import Navbar from "./components/Navbar.js";
 
 async function App() {
   let camera = new Camera({
@@ -39,21 +41,7 @@ async function App() {
   addChildren(document.body, [
     (header = createElement("header")),
     (main = createElement("main", {}, [camera.videoElement, codeOutput])),
-    (footer = createElement("footer", {}, [
-      createElement("button", {
-        onclick: async function () {
-          await camera.startCamera();
-        },
-        innerText: "startCamera",
-      }),
-      createElement("button", {
-        onclick: async function () {
-          if (!camera.running) await camera.startCamera();
-          await scanner.start();
-        },
-        innerText: "startScanner",
-      }),
-    ])),
+    (footer = createElement("footer", { style: NavbarStyle }, [Navbar()])),
   ]);
 }
 
