@@ -22,5 +22,13 @@ export default async function Add() {
 
   camera.startCamera();
 
-  return createElement("main", {}, [camera.videoElement]);
+  return createElement("main", {}, [
+    camera.videoElement,
+    createElement("button", {
+      innerText: "Take Picture",
+      onclick: function () {
+        console.log(camera.takePicture);
+      },
+    }),
+  ]);
 }
