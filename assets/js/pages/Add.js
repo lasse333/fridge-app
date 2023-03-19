@@ -1,5 +1,7 @@
 import Camera from "../components/Camera.js";
-import { createElement } from "../FastHTML.js";
+import { addChildren, clearChildren, createElement } from "../FastHTML.js";
+import AddStyle from "../../css/add.css" assert { type: "css" };
+import AddForm from "./AddForm.js";
 
 export default async function Add() {
   if (
@@ -9,10 +11,12 @@ export default async function Add() {
       }
     }).length <= 0
   ) {
-    return createElement("main", {}, [
-      createElement("h1", {
-        innerText: "A Camera is needed for this operation",
-      }),
+    return createElement("main", { style: AddStyle }, [
+      createElement("div", {}, [
+        createElement("h2", {
+          innerText: "A Camera is needed for this operation",
+        }),
+      ]),
     ]);
   }
 
@@ -22,13 +26,19 @@ export default async function Add() {
 
   camera.startCamera();
 
-  return createElement("main", {}, [
-    camera.videoElement,
-    createElement("button", {
-      innerText: "Take Picture",
-      onclick: function () {
-        console.log(camera.takePicture);
-      },
-    }),
+  let page = createElement("main", { style: AddStyle }, [
+    createElement("div", {}, [
+      camera.videoElement,
+      createElement("button", {
+        innerText: "Take Picture",
+        onclick: async function () {
+          clearChildren(page);
+          addChildren(page, AddForm(await camera.takePicture()));
+          camera.stopCamera();
+        },
+      }),
+    ]),
   ]);
+
+  return page;
 }

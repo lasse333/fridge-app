@@ -4,6 +4,7 @@ import NavbarStyle from "../css/navbar.css" assert { type: "css" };
 import Navbar from "./components/Navbar.js";
 import Add from "./pages/Add.js";
 import Fridge from "./pages/Fridge.js";
+import Settings from "./pages/Settings.js";
 
 async function App() {
   {
@@ -53,9 +54,7 @@ async function App() {
     await simpleRoutesAsync({
       "/fridge": Fridge,
       "/add": Add,
-      "/settings": function () {
-        return createElement("div", { innerText: "settings" });
-      },
+      "/settings": Settings,
       "/*": async () => {
         return "hello";
       },

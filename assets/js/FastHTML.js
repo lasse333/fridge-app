@@ -113,6 +113,9 @@ export function clearChildren(parrentElement) {
     document.querySelectorAll(parrentElement).forEach((element) => {
       element.innerHTML = "";
     });
+  } else if (parrentElement.shadowRoot) {
+    parrentElement.shadowRoot.innerHTML = "";
+    return parrentElement;
   } else {
     parrentElement.innerHTML = "";
     return parrentElement;
@@ -148,4 +151,15 @@ export async function simpleRoutesAsync(routes = {}) {
     if (url.test(window.location.href))
       return await routes[path](urlParams(url.exec(window.location.href)));
   }
+}
+
+export function createImageFromArrayBuffer(
+  arrayBuffer,
+  mimeType = "image/png"
+) {
+  const blob = new Blob([arrayBuffer], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const img = new Image();
+  img.src = url;
+  return img;
 }
