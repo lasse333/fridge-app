@@ -5,7 +5,7 @@
     "python HTTPserver.py": {
       "name": "Start development server",
       "command": "python HTTPserver.py",
-      "runAtStart": true
+      "runAtStart": false
     }
   }
 }

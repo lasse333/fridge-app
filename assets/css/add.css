@@ -19,3 +19,31 @@ button {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.camera-panel {
+  padding: 10px;
+  width: 100%;
+}
+
+.form-body {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+}
+
+.form-body label,
+.form-body input {
+  grid-column: 1/-1;
+}
+
+.picture-button {
+  padding: 0;
+  margin: 0 auto;
+  grid-column: 1/-1;
+  max-width: 350px;
+  /* width: fit-content; */
+}
+
+.picture-button img {
+  width: 100%;
+}

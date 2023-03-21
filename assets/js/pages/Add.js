@@ -26,17 +26,26 @@ export default async function Add() {
 
   camera.startCamera();
 
-  let page = createElement("main", { style: AddStyle }, [
-    createElement("div", {}, [
+  document.querySelectorAll("nav button").forEach((button) => {
+    console.log(button);
+    button.addEventListener("click", function () {
+      camera.stopCamera();
+    });
+  });
+
+  let page = createElement("main", { style: AddStyle, class: "add-item" }, [
+    createElement("div", { class: "camera-body" }, [
       camera.videoElement,
-      createElement("button", {
-        innerText: "Take Picture",
-        onclick: async function () {
-          clearChildren(page);
-          addChildren(page, AddForm(await camera.takePicture()));
-          camera.stopCamera();
-        },
-      }),
+      createElement("div", { class: "camera-panel" }, [
+        createElement("button", {
+          innerText: "Take Picture",
+          onclick: async function () {
+            clearChildren(page);
+            addChildren(page, AddForm(await camera.takePicture()));
+            camera.stopCamera();
+          },
+        }),
+      ]),
     ]),
   ]);
 

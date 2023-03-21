@@ -52,6 +52,13 @@ footer {
   background-color: var(--secondary-bg-color);
 }
 
+input,
+button,
+textarea {
+  width: 100%;
+  padding: 10px;
+}
+
 button {
   background-color: var(--default-btn-bg);
   color: var(--text-color);
