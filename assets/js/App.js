@@ -28,7 +28,7 @@ function App() {
   if (true) {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("../ServiceWorker.js")
+        .register("./ServiceWorker.js")
         .then((reg) => console.log("service worker registered", reg))
         .catch((err) => console.log("service worker not registered", err));
     }
