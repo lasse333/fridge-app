@@ -165,7 +165,7 @@ export default function Item(i) {
                   },
                   [
                     createElement("img", {
-                      src: "/fridge-app/assets/icons/Add.svg",
+                      src: "../assets/icons/Add.svg",
                       style: { height: "20px", width: "20px" },
                     }),
                   ]
@@ -188,7 +188,7 @@ export default function Item(i) {
                   },
                   [
                     createElement("img", {
-                      src: "/fridge-app/assets/icons/Remove.svg",
+                      src: "../assets/icons/Remove.svg",
                       style: { height: "20px", width: "20px" },
                     }),
                   ]

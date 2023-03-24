@@ -40,7 +40,7 @@ export function addChildren(element, children) {
 }
 
 export function changeUrlPath(path) {
-  window.history.pushState("", "", "/fridge-app" + path);
+  window.history.pushState("", "", path);
 }
 
 export function clearChildren(selectors) {

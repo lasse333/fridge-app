@@ -28,7 +28,7 @@ function App() {
   if (true) {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("./ServiceWorker.js")
+        .register("../ServiceWorker.js")
         .then((reg) => console.log("service worker registered", reg))
         .catch((err) => console.log("service worker not registered", err));
     }
@@ -55,7 +55,7 @@ function App() {
 
   let path = location.pathname.slice(1).split("/");
 
-  switch (path[1]) {
+  switch (path[0]) {
     case "add":
       Add();
       break;
@@ -69,8 +69,8 @@ function App() {
       break;
 
     case "item":
-      if (getItems() && getItems()[+path[2]]) {
-        Item(+path[2]);
+      if (getItems() && getItems()[+path[1]]) {
+        Item(+path[1]);
       } else {
         Add();
       }

@@ -1,41 +1,41 @@
 {
-    "name": "Fridge App",
-    "short_name": "Fridge",
-    "display": "standalone",
-    "start_url": "../",
-    "background_color": "black",
-    "theme_color": "black",
-    "orientation": "portrait-primary",
-    "description": "An app to keep track of whats in your Fridge and when things expire",
-    "icons": [
-        {
-            "src": "/assets/images/logo-small.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "/assets/images/logo-large.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "/assets/images/logo-solid-large.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "/assets/images/logo-solid-small.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "/assets/images/logo-vector.svg",
-            "sizes": "any",
-            "purpose": "any"
-        }
-    ]
+  "name": "Fridge App",
+  "short_name": "Fridge",
+  "display": "standalone",
+  "start_url": "../",
+  "background_color": "black",
+  "theme_color": "black",
+  "orientation": "portrait-primary",
+  "description": "An app to keep track of whats in your Fridge and when things expire",
+  "icons": [
+    {
+      "src": "/assets/images/logo-small.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/logo-large.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/logo-solid-large.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/images/logo-solid-small.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/images/logo-vector.svg",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
 }
