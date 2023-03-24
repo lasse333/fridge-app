@@ -25,7 +25,7 @@ export default function Navbar() {
       },
       [
         createElement("img", {
-          src: "/assets/icons/" + img,
+          src: "/fridge-app/assets/icons/" + img,
           alt: buttonText,
           style: iconStyle,
         }),
