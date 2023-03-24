@@ -1,244 +1,251 @@
-const version = 1
+const version = 1;
 
-const staticCacheName = 'site-static-v' + version;
-let db
+const staticCacheName = "site-static-v" + version;
+let db;
 
 const database = {
-  init: function() {
+  init: function () {
     const DBOpenRequest = self.indexedDB.open("itemDB", 1);
 
     DBOpenRequest.onerror = (event) => {
-        //console.error("DB error: ", event)
-    }
+      //console.error("DB error: ", event)
+    };
 
-        
     DBOpenRequest.onsuccess = (event) => {
-        //console.log("DB success: ", event)
-        db = DBOpenRequest.result
-        //console.log(db)
-        
-    }
+      //console.log("DB success: ", event)
+      db = DBOpenRequest.result;
+      //console.log(db)
+    };
 
     DBOpenRequest.onupgradeneeded = (event) => {
-        //console.log("Upgrading IDB from", event.oldVersion, "to", event.newVersion || db.version, event)
+      //console.log("Upgrading IDB from", event.oldVersion, "to", event.newVersion || db.version, event)
 
-        db = DBOpenRequest.result
-        //console.log(db)
-        if (!db.objectStoreNames.contains("items")) db.createObjectStore("items", { keyPath: "uuid" })
-    }
+      db = DBOpenRequest.result;
+      //console.log(db)
+      if (!db.objectStoreNames.contains("items"))
+        db.createObjectStore("items", { keyPath: "uuid" });
+    };
   },
-  write: function(item) {
-    let tx = db.transaction("items", "readwrite")
-    
+  write: function (item) {
+    let tx = db.transaction("items", "readwrite");
+
     tx.oncomplete = (event) => {
-        //console.log(event)
-    }
+      //console.log(event)
+    };
 
     tx.onerror = (error) => {
-        //console.error(error)
-    }
+      //console.error(error)
+    };
 
-    let store = tx.objectStore("items")
-    let request = store.add(item)
+    let store = tx.objectStore("items");
+    let request = store.add(item);
   },
-  delete: function(uuid) {
-    let tx = db.transaction("items", "readwrite")
-    
+  delete: function (uuid) {
+    let tx = db.transaction("items", "readwrite");
+
     tx.oncomplete = (event) => {
-        //console.log(event)
-    }
+      //console.log(event)
+    };
 
     tx.onerror = (error) => {
-        //console.error(error) 
-    }
+      //console.error(error)
+    };
 
-    let store = tx.objectStore("items")
-    let request = store.delete(uuid)
+    let store = tx.objectStore("items");
+    let request = store.delete(uuid);
   },
-  update: function(item) {
-    let tx = db.transaction("items", "readwrite")
-    
+  update: function (item) {
+    let tx = db.transaction("items", "readwrite");
+
     tx.oncomplete = (event) => {
-        //console.log(event)
-    }
+      //console.log(event)
+    };
 
     tx.onerror = (error) => {
-        //console.error(error)
-    }
+      //console.error(error)
+    };
 
-    let store = tx.objectStore("items")
-    let request = store.put(item)
-  }
-}
+    let store = tx.objectStore("items");
+    let request = store.put(item);
+  },
+};
 
 const assets = [
-  "/index.html",
-  "/manifest.json",
-  "/favicon.ico",
-  "/assets/css/style.css",
-  "/assets/icons/Add.svg",
-  "/assets/icons/Back.svg",
-  "/assets/icons/Fridge.svg",
-  "/assets/icons/Remove.svg",
-  "/assets/icons/Settings.svg",
-  "/assets/js/components/camera.js",
-  "/assets/js/components/datetime.js",
-  "/assets/js/components/localstorage.js",
-  "/assets/js/components/navbar.js",
-  "/assets/js/components/uuid.js",
-  "/assets/js/components/language.js",
-  "/assets/js/pages/AddItem.js",
-  "/assets/js/pages/Fridge.js",
-  "/assets/js/pages/Item.js",
-  "/assets/js/pages/Settings.js",
-  "/assets/js/App.js",
-  "/assets/js/FastHTML.js",
-  "/assets/js/index.js",
-  "/assets/images/logo-large.png",
-  "/assets/images/logo-small.png",
-  "/assets/images/logo-solid-small.png",
-  "/assets/images/logo-solid-large.png",
-  "/assets/images/logo-vector.svg"
-]
+  "/fridge-app/index.html",
+  "/fridge-app/manifest.json",
+  "/fridge-app/favicon.ico",
+  "/fridge-app/assets/css/style.css",
+  "/fridge-app/assets/icons/Add.svg",
+  "/fridge-app/assets/icons/Back.svg",
+  "/fridge-app/assets/icons/Fridge.svg",
+  "/fridge-app/assets/icons/Remove.svg",
+  "/fridge-app/assets/icons/Settings.svg",
+  "/fridge-app/assets/js/components/camera.js",
+  "/fridge-app/assets/js/components/datetime.js",
+  "/fridge-app/assets/js/components/localstorage.js",
+  "/fridge-app/assets/js/components/navbar.js",
+  "/fridge-app/assets/js/components/uuid.js",
+  "/fridge-app/assets/js/components/language.js",
+  "/fridge-app/assets/js/pages/AddItem.js",
+  "/fridge-app/assets/js/pages/Fridge.js",
+  "/fridge-app/assets/js/pages/Item.js",
+  "/fridge-app/assets/js/pages/Settings.js",
+  "/fridge-app/assets/js/App.js",
+  "/fridge-app/assets/js/FastHTML.js",
+  "/fridge-app/assets/js/index.js",
+  "/fridge-app/assets/images/logo-large.png",
+  "/fridge-app/assets/images/logo-small.png",
+  "/fridge-app/assets/images/logo-solid-small.png",
+  "/fridge-app/assets/images/logo-solid-large.png",
+  "/fridge-app/assets/images/logo-vector.svg",
+];
 
-let langSetting = "en"
+let langSetting = "en";
 
 const langText = {
-  "en": {
-    "expiredItems": {
-      "title": "Item(s) has expired",
-      "body": " item(s) is expired in your fridge"
+  en: {
+    expiredItems: {
+      title: "Item(s) has expired",
+      body: " item(s) is expired in your fridge",
     },
-    "emptyFridge": {
-      "title": "Fridge is empty",
-      "body": "Refill your fridge"
+    emptyFridge: {
+      title: "Fridge is empty",
+      body: "Refill your fridge",
     },
-    "checkFridge": {
-      "title": "Check your fridge",
-      "body": "A Friendly reminder to check your fridge :)"
-    }
+    checkFridge: {
+      title: "Check your fridge",
+      body: "A Friendly reminder to check your fridge :)",
+    },
   },
-  "da": {
-    "expiredItems": {
-      "title": "Ting er udløbet",
-      "body": " ting i dit køleskab er udløbet"
+  da: {
+    expiredItems: {
+      title: "Ting er udløbet",
+      body: " ting i dit køleskab er udløbet",
     },
-    "emptyFridge": {
-      "title": "Dit køleskab er tomt",
-      "body": "Genopfyld dit køleskab"
+    emptyFridge: {
+      title: "Dit køleskab er tomt",
+      body: "Genopfyld dit køleskab",
     },
-    "checkFridge": {
-      "title": "Kig i dit køleskab",
-      "body": "En venlig påmindelse om at tage et kig i dit køleskab :)"
-    }
+    checkFridge: {
+      title: "Kig i dit køleskab",
+      body: "En venlig påmindelse om at tage et kig i dit køleskab :)",
+    },
   },
-  "de": {
-    "expiredItems": {
-      "title": "Item(s) has expired",
-      "body": " item(s) is expired in your fridge"
+  de: {
+    expiredItems: {
+      title: "Item(s) has expired",
+      body: " item(s) is expired in your fridge",
     },
-    "emptyFridge": {
-      "title": "Dein Kühlschrank ist leer",
-      "body": "Fülle deinen Kühlschrank wieder auf"
+    emptyFridge: {
+      title: "Dein Kühlschrank ist leer",
+      body: "Fülle deinen Kühlschrank wieder auf",
     },
-    "checkFridge": {
-      "title": "Überprüfe deinen Kühlschrank",
-      "body": "Eine kleine Erinnerung, dass der Kühlschrank überprüft werden soll :)"
-    }
-  }
-}
+    checkFridge: {
+      title: "Überprüfe deinen Kühlschrank",
+      body: "Eine kleine Erinnerung, dass der Kühlschrank überprüft werden soll :)",
+    },
+  },
+};
 
-self.addEventListener("install", evt => {
+self.addEventListener("install", (evt) => {
   ////console.log("Service Worker installed", evt)
   evt.waitUntil(
     caches.open(staticCacheName).then((cache) => {
       //console.log('caching shell assets');
       cache.addAll(assets);
     })
-  )
-})
-
-// activate event
-self.addEventListener('activate', evt => {
-  ////console.log('service worker activated');
-  database.init()
-  evt.waitUntil(
-    () => {
-      // service worker script
-
-      caches.keys().then(keys => {
-        ////console.log(keys);
-
-        return Promise.all(keys
-          .filter(key => key !== staticCacheName)
-          .map(key => caches.delete(key))
-        );
-      })
-    }
   );
 });
 
+// activate event
+self.addEventListener("activate", (evt) => {
+  ////console.log('service worker activated');
+  database.init();
+  evt.waitUntil(() => {
+    // service worker script
 
+    caches.keys().then((keys) => {
+      ////console.log(keys);
 
-self.addEventListener('fetch', evt => {
+      return Promise.all(
+        keys
+          .filter((key) => key !== staticCacheName)
+          .map((key) => caches.delete(key))
+      );
+    });
+  });
+});
+
+self.addEventListener("fetch", (evt) => {
   ////console.log('fetch event', evt);
   evt.respondWith(
-    caches.match(evt.request).then(cacheRes => {
-      return cacheRes || fetch(evt.request).then(fetchRes => {
-        return fetchRes
-      });
-    }).catch(() => {
-      if (evt.request.url.split(location.origin)[1].indexOf('.') == -1) {
-        //console.log("loaded index.html")
-        return caches.match('/index.html');
-      }
-    })
+    caches
+      .match(evt.request)
+      .then((cacheRes) => {
+        return (
+          cacheRes ||
+          fetch(evt.request).then((fetchRes) => {
+            return fetchRes;
+          })
+        );
+      })
+      .catch(() => {
+        if (evt.request.url.split(location.origin)[1].indexOf(".") == -1) {
+          //console.log("loaded index.html")
+          return caches.match("/index.html");
+        }
+      })
   );
 });
 
 self.addEventListener("message", (event) => {
-  let data = JSON.parse(event.data)
+  let data = JSON.parse(event.data);
   //console.log(data)
   switch (data.c) {
-
     case "LANG":
-      langSetting = data.d
-      break
+      langSetting = data.d;
+      break;
 
     case "ADD":
-      database.write(data.d)
-      break
+      database.write(data.d);
+      break;
 
     case "UPDATE":
-      database.update(data.d)
-      break
+      database.update(data.d);
+      break;
 
     case "DELETE":
-      database.delete(data.d.uuid)
-      break
+      database.delete(data.d.uuid);
+      break;
 
     default:
-      break
+      break;
   }
   //self.registration.showNotification("Test", {body: "Hello"})
-})
+});
 
-
-self.addEventListener('periodicsync', (event) => {
+self.addEventListener("periodicsync", (event) => {
   //console.log("hello", event)
-  if (event.tag === 'check-expired' /*|| event.tag === "test-tag-from-devtools"*/) {
-    event.waitUntil((() => {
-      let tx = db.transaction("items", "readonly")
-    
-      tx.oncomplete = (event) => {
+  if (
+    event.tag === "check-expired" /*|| event.tag === "test-tag-from-devtools"*/
+  ) {
+    event.waitUntil(
+      (() => {
+        let tx = db.transaction("items", "readonly");
+
+        tx.oncomplete = (event) => {
           //console.log(event)
 
-          let data = request.result
-          let expiredItems = []
-          data.forEach(item => {
+          let data = request.result;
+          let expiredItems = [];
+          data.forEach((item) => {
             if (item.ExperationDate != "") {
-              if (Math.ceil((+item.ExperationDate-Date.now())/1000/60/60/24) < 1) {
-                expiredItems.push(item)
+              if (
+                Math.ceil(
+                  (+item.ExperationDate - Date.now()) / 1000 / 60 / 60 / 24
+                ) < 1
+              ) {
+                expiredItems.push(item);
               }
             }
           });
@@ -246,32 +253,54 @@ self.addEventListener('periodicsync', (event) => {
           //console.log(expiredItems)
 
           if (expiredItems.length > 0) {
-            self.registration.showNotification(langText[langSetting]["expiredItems"]["title"], {body: expiredItems.length + langText[langSetting]["expiredItems"]["body"], icon: "/assets/images/logo-solid-small.png"})
+            self.registration.showNotification(
+              langText[langSetting]["expiredItems"]["title"],
+              {
+                body:
+                  expiredItems.length +
+                  langText[langSetting]["expiredItems"]["body"],
+                icon: "/assets/images/logo-solid-small.png",
+              }
+            );
           } else if (data.length == 0) {
-            self.registration.showNotification(langText[langSetting]["emptyFridge"]["title"], {body: langText[langSetting]["emptyFridge"]["body"], icon: "/assets/images/logo-solid-small.png"})
+            self.registration.showNotification(
+              langText[langSetting]["emptyFridge"]["title"],
+              {
+                body: langText[langSetting]["emptyFridge"]["body"],
+                icon: "/assets/images/logo-solid-small.png",
+              }
+            );
           } else {
-            self.registration.showNotification(langText[langSetting]["checkFridge"]["title"], {body: langText[langSetting]["checkFridge"]["body"], icon: "/assets/images/logo-solid-small.png"})
+            self.registration.showNotification(
+              langText[langSetting]["checkFridge"]["title"],
+              {
+                body: langText[langSetting]["checkFridge"]["body"],
+                icon: "/assets/images/logo-solid-small.png",
+              }
+            );
           }
-      }
+        };
 
-      tx.onerror = (error) => {
+        tx.onerror = (error) => {
           //console.error(error)
-      }
+        };
 
-      let store = tx.objectStore("items")
-      let request = store.getAll()
+        let store = tx.objectStore("items");
+        let request = store.getAll();
 
-      
-
-      //self.registration.showNotification("Test", {body: "Hello"/*, image: JSON.parse(self.localStorage["items"])[0].ImageData*/})
-    })())
+        //self.registration.showNotification("Test", {body: "Hello"/*, image: JSON.parse(self.localStorage["items"])[0].ImageData*/})
+      })()
+    );
   } else if (event.tag === "test-tag-from-devtools") {
-    console.log(langSetting)
+    console.log(langSetting);
   }
-
 });
 
-self.addEventListener("notificationclick", (event) => {
-  event.notification.close();
-  clients.openWindow('/fridge');
-},false)
+self.addEventListener(
+  "notificationclick",
+  (event) => {
+    event.notification.close();
+    clients.openWindow("/fridge");
+  },
+  false
+);
