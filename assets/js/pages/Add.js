@@ -33,6 +33,10 @@ export default async function Add() {
     });
   });
 
+  window.addEventListener("rerender", function () {
+    camera.stopCamera();
+  });
+
   let page = createElement("main", { style: AddStyle, class: "add-item" }, [
     createElement("div", { class: "camera-body" }, [
       camera.videoElement,
