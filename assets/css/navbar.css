@@ -23,6 +23,10 @@ button.active {
   ) !important;
 }
 
+button:active {
+  outline: none;
+}
+
 img {
   height: 30px;
   width: 30px;

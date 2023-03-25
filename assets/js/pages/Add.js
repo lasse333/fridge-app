@@ -37,16 +37,29 @@ export default async function Add() {
     camera.stopCamera();
   });
 
+  async function takePicture() {
+    clearChildren(page);
+    addChildren(page, AddForm(await camera.takePicture()));
+    camera.stopCamera();
+  }
+
   let page = createElement("main", { style: AddStyle, class: "add-item" }, [
     createElement("div", { class: "camera-body" }, [
-      camera.videoElement,
+      createElement(
+        "button",
+        {
+          class: "video-button",
+          onclick: async function () {
+            takePicture();
+          },
+        },
+        [camera.videoElement]
+      ),
       createElement("div", { class: "camera-panel" }, [
         createElement("button", {
           innerText: "Take Picture",
           onclick: async function () {
-            clearChildren(page);
-            addChildren(page, AddForm(await camera.takePicture()));
-            camera.stopCamera();
+            takePicture();
           },
         }),
       ]),

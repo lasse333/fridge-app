@@ -12,6 +12,14 @@ export default function AddForm(image) {
     required: false,
     name: "ExperationDate",
   });
+  let amountElement = createElement("input", {
+    type: "number",
+    id: "amount",
+    min: 1,
+    step: 1,
+    value: loadInput("amount") || 1,
+    onchange: saveInput,
+  });
 
   function saveInput(e) {
     let data = JSON.parse(window.sessionStorage.getItem("draft")) || {};
@@ -30,8 +38,8 @@ export default function AddForm(image) {
 
   let elements = [];
 
+  //Picture button
   elements.push(
-    //Picture button
     createElement(
       "button",
       {
@@ -43,7 +51,9 @@ export default function AddForm(image) {
       [imageElement]
     )
   );
-  elements.push(createElement("label", { for: "name", innerText: "Name:" })); //Label for name input
+
+  //Name input
+  elements.push(createElement("label", { for: "name", innerText: "Name:" }));
   elements.push(
     createElement("input", {
       id: "name",
@@ -53,9 +63,11 @@ export default function AddForm(image) {
       value: loadInput("name"),
     })
   );
+
+  //Experation Date input
   elements.push(
     createElement("label", { for: "dateInput", innerText: "Experation Date:" })
-  ); //Label for experationDate input
+  );
   elements.push(experationDateElement);
   elements.push(
     createElement("input", {
@@ -66,6 +78,44 @@ export default function AddForm(image) {
         saveInput(e);
         experationDateElement.value = Date.parse(e.target.value);
       },
+    })
+  );
+
+  //Amount input
+  elements.push(
+    createElement("label", { for: "amount", innerText: "Amount:" })
+  );
+  elements.push(amountElement);
+  elements.push(
+    createElement(
+      "button",
+      {
+        class: "add-button",
+        onclick: function () {
+          amountElement.stepUp();
+        },
+      },
+      [createElement("img", { src: "../assets/icons/Add.svg" })]
+    )
+  );
+  elements.push(
+    createElement(
+      "button",
+      {
+        class: "remove-button",
+        onclick: function () {
+          amountElement.stepDown();
+        },
+      },
+      [createElement("img", { src: "../assets/icons/Remove.svg" })]
+    )
+  );
+
+  //Submit button
+  elements.push(
+    createElement("button", {
+      innerText: "Put item in fridge",
+      class: "submit-button",
     })
   );
 

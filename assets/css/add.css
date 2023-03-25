@@ -20,6 +20,11 @@ button {
   font-weight: bold;
 }
 
+.video-button {
+  padding: 0;
+  background-color: var(--primary-bg-color);
+}
+
 .camera-panel {
   padding: 10px;
   width: 100%;
@@ -30,6 +35,7 @@ button {
   display: grid;
   grid-template-columns: 3fr 2fr 1fr;
   height: fit-content;
+  gap: 5px;
 }
 
 .form-body label,
@@ -38,11 +44,11 @@ button {
 }
 
 label {
-  margin: 10px 0 5px;
+  margin: 5px 0 5px;
 }
 
 input {
-  margin: 0 0 10px;
+  margin: 0 0 5px;
 }
 
 .picture-button {
@@ -50,9 +56,37 @@ input {
   margin: 10px auto;
   grid-column: 1/-1;
   max-width: 350px;
+  background-color: var(--primary-bg-color);
   /* width: fit-content; */
 }
 
 .picture-button img {
   width: 100%;
+}
+
+.add-button,
+.remove-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button {
+  background-color: var(--btn-positive-bg);
+  grid-column: 1/2;
+}
+
+.remove-button {
+  background-color: var(--btn-negative-bg);
+  grid-column: 2/-1;
+}
+
+.add-button > img,
+.remove-button > img {
+  width: 1.5rem;
+}
+
+.submit-button {
+  grid-column: 1/-1;
+  margin-top: 20px;
 }
