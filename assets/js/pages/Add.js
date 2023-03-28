@@ -39,7 +39,7 @@ export default async function Add() {
 
   async function takePicture() {
     clearChildren(page);
-    addChildren(page, AddForm(await camera.takePicture()));
+    addChildren(page, await AddForm(await camera.takePicture()));
     camera.stopCamera();
   }
 
