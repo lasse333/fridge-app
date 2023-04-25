@@ -26,7 +26,10 @@ export default async function AddForm(image) {
   let experationDateElement = createElement("input", {
     type: "hidden",
     required: false,
+    id: "ExperationDate",
     name: "ExperationDate",
+    onchange: saveInput,
+    value: loadInput("ExperationDate"),
   });
   let amountElement = createElement("input", {
     type: "number",
@@ -85,6 +88,7 @@ export default async function AddForm(image) {
       onchange: function (e) {
         saveInput(e);
         experationDateElement.value = Date.parse(e.target.value) / 1000;
+        experationDateElement.onchange({ target: experationDateElement });
       },
     })
   );
@@ -101,6 +105,7 @@ export default async function AddForm(image) {
         class: "add-button",
         onclick: function () {
           amountElement.stepUp();
+          amountElement.onchange({ target: amountElement });
         },
       },
       [createElement("img", { src: "../assets/icons/Add.svg" })]
@@ -113,6 +118,7 @@ export default async function AddForm(image) {
         class: "remove-button",
         onclick: function () {
           amountElement.stepDown();
+          amountElement.onchange({ target: amountElement });
         },
       },
       [createElement("img", { src: "../assets/icons/Remove.svg" })]

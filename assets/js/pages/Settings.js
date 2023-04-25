@@ -3,6 +3,6 @@ import SettingsStyle from "../../css/settings.css" assert { type: "css" };
 
 export default function Settings() {
   return createElement("main", { style: SettingsStyle }, [
-    createElement("div", {class: })
+    createElement("div", {}),
   ]);
 }

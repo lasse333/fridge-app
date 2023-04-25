@@ -1,3 +1,13 @@
+export async function hasCamera() {
+  return (
+    (await navigator.mediaDevices.enumerateDevices()).filter((device) => {
+      if (device.kind == "videoinput") {
+        return device;
+      }
+    }).length > 0
+  );
+}
+
 export default class Camera {
   constructor(
     constraints = { video: true },

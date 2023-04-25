@@ -1,16 +1,10 @@
-import Camera from "../components/Camera.js";
+import Camera, { hasCamera } from "../components/Camera.js";
 import { addChildren, clearChildren, createElement } from "../FastHTML.js";
 import AddStyle from "../../css/add.css" assert { type: "css" };
 import AddForm from "./AddForm.js";
 
 export default async function Add() {
-  if (
-    (await navigator.mediaDevices.enumerateDevices()).filter((device) => {
-      if (device.kind == "videoinput") {
-        return device;
-      }
-    }).length <= 0
-  ) {
+  if (!(await hasCamera())) {
     return createElement("main", { style: AddStyle }, [
       createElement("div", {}, [
         createElement("h2", {
