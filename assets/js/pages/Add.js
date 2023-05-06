@@ -1,5 +1,5 @@
 import Camera from "../components/Camera.js";
-import { createElement } from "../FastHTML.js";
+import { createElement, createImageFromArrayBuffer } from "../FastHTML.js";
 import AddStyle from "../../css/add.css" assert { type: "css" };
 
 export default async function Add() {
@@ -10,9 +10,14 @@ export default async function Add() {
   let previewPicture = createElement("img", {
     src: "/assets/icons/Fridge.svg",
   });
+  let ImageData = new ArrayBuffer(0);
 
   async function takePicture() {
-    console.log(await camera.takePicture());
+    ImageData = await camera.takePicture();
+
+    previewPicture.src = createImageFromArrayBuffer(ImageData).src;
+    console.log(ImageData);
+
     camera.stopCamera();
     cameraPopup.close();
   }
@@ -43,6 +48,7 @@ export default async function Add() {
         [previewPicture]
       ),
     ]),
+    //Pop ups
     cameraPopup,
   ]);
 }
