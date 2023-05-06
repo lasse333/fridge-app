@@ -1,0 +1,92 @@
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+h2 {
+  text-align: center;
+}
+
+video {
+  width: 100%;
+  max-height: 65vh;
+}
+
+button {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.video-button {
+  padding: 0;
+  background-color: var(--primary-bg-color);
+}
+
+.camera-panel {
+  padding: 10px;
+  width: 100%;
+}
+
+.form-body {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  height: fit-content;
+  gap: 5px;
+}
+
+.form-body label,
+.form-body input {
+  grid-column: 1/-1;
+}
+
+label {
+  margin: 5px 0 5px;
+}
+
+input {
+  margin: 0 0 5px;
+}
+
+.picture-button {
+  padding: 0;
+  margin: 10px auto;
+  grid-column: 1/-1;
+  max-width: 350px;
+  background-color: var(--primary-bg-color);
+  /* width: fit-content; */
+}
+
+.picture-button img {
+  width: 100%;
+}
+
+.add-button,
+.remove-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button {
+  background-color: var(--btn-positive-bg);
+  grid-column: 1/2;
+}
+
+.remove-button {
+  background-color: var(--btn-negative-bg);
+  grid-column: 2/-1;
+}
+
+.add-button > img,
+.remove-button > img {
+  width: 1.5rem;
+}
+
+.submit-button {
+  grid-column: 1/-1;
+  margin-top: 20px;
+}
