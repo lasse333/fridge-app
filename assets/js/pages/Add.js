@@ -7,6 +7,10 @@ export default async function Add() {
     video: { width: 200, height: 200, facingMode: "environment" },
   });
 
+  let previewPicture = createElement("img", {
+    src: "/assets/icons/Fridge.svg",
+  });
+
   async function takePicture() {
     console.log(await camera.takePicture());
     camera.stopCamera();
@@ -26,14 +30,19 @@ export default async function Add() {
   ]);
 
   return createElement("main", { style: AddStyle }, [
-    createElement("button", {
-      innerText: "startCamera",
-      onclick: function () {
-        camera.startCamera();
-        cameraPopup.showModal();
-      },
-    }),
+    createElement("div", { class: "pageContainer" }, [
+      createElement(
+        "button",
+        {
+          class: "changePicture",
+          onclick: function () {
+            camera.startCamera();
+            cameraPopup.showModal();
+          },
+        },
+        [previewPicture]
+      ),
+    ]),
     cameraPopup,
   ]);
 }
-//hello
