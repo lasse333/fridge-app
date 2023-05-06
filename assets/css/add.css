@@ -2,6 +2,7 @@ dialog {
   border: none;
   background-color: var(--primary-bg-color);
 
+  padding: 10px;
   max-width: 100vw;
   max-width: 100dvw;
   width: 100%;
