@@ -7,6 +7,7 @@ video {
 .pageContainer {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .cameraContainer {
@@ -26,8 +27,10 @@ video {
 }
 
 .changePicture {
-  width: 55vmin;
+  background-color: var(--primary-bg-color);
+  width: fit-content;
   height: 55vmin;
+  max-height: 40dvh;
   margin: 0 auto;
   padding: 0;
 }

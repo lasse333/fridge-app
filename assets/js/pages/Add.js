@@ -36,6 +36,7 @@ export default async function Add() {
 
   return createElement("main", { style: AddStyle }, [
     createElement("div", { class: "pageContainer" }, [
+      //Open camera, Show picture, take Picture
       createElement(
         "button",
         {
@@ -47,6 +48,7 @@ export default async function Add() {
         },
         [previewPicture]
       ),
+      createElement("input", { placeholder: "Item name" }),
     ]),
     //Pop ups
     cameraPopup,
