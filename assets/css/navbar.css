@@ -24,16 +24,17 @@ button.active {
   ) !important;
 }
 
-button:active {
-  outline: none;
-}
-
 button:focus {
   background: radial-gradient(
     circle,
     var(--default-btn-bg) 0,
     transparent 35px
   ) !important;
+}
+
+button:active {
+  outline: none;
+  background: transparent;
 }
 
 img {
