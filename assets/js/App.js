@@ -1,5 +1,4 @@
-import { createElement, simpleRoutesAsync } from "./FastHTML.js";
-import NavbarStyle from "../css/navbar.css" assert { type: "css" };
+import { createElement, simpleRoutesAsync, importCSS } from "./FastHTML.js";
 import Navbar from "./components/Navbar.js";
 import Add from "./pages/Add.js";
 import Fridge from "./pages/Fridge.js";
@@ -24,7 +23,7 @@ async function App() {
 
   //   console.log(fridge);
   // }
-
+  let NavbarStyle = await importCSS(location.origin + "/assets/css/navbar.css");
   let header;
   let main;
   let footer;

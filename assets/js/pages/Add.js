@@ -1,14 +1,18 @@
 import Camera from "../components/Camera.js";
-import { createElement, createImageFromArrayBuffer } from "../FastHTML.js";
-import AddStyle from "../../css/add.css" assert { type: "css" };
+import {
+  createElement,
+  createImageFromArrayBuffer,
+  importCSS,
+} from "../FastHTML.js";
 
 export default async function Add() {
+  let AddStyle = await importCSS(location.origin + "/assets/css/add.css");
   let camera = new Camera({
     video: { width: 200, height: 200, facingMode: "environment" },
   });
 
   let previewPicture = createElement("img", {
-    src: "/assets/icons/Fridge.svg",
+    src: "/assets/icons/Camera.svg",
   });
   let ImageData = new ArrayBuffer(0);
 
@@ -46,7 +50,7 @@ export default async function Add() {
             cameraPopup.showModal();
           },
         },
-        [previewPicture]
+        [previewPicture],
       ),
       createElement("input", { placeholder: "Item name" }),
     ]),

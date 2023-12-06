@@ -22,6 +22,14 @@ export function createElement(type, attributesIn, childrenIn) {
   let children = childrenIn ?? [];
 
   let element = document.createElement(type);
+  if (["a", "button"].includes(type)) {
+    element.addEventListener("click", function (e) {
+      changeStyle(this, { cursor: "progress" });
+      setTimeout(function () {
+        changeStyle(element, { cursor: "" });
+      }, 1000);
+    });
+  }
   Object.assign(element, attributes);
   if (attributes.class) element.className = attributes.class;
   if (attributes.for) element.setAttribute("for", attributes.for);
@@ -66,6 +74,19 @@ function applyStyle(element, style) {
 }
 
 /**
+ * @async
+ * @param {string} from
+ * @returns {Promise<CSSStyleSheet>}
+ */
+export async function importCSS(from) {
+  let css_text = await fetch(from);
+  css_text = await css_text.text();
+  let css_obj = new CSSStyleSheet();
+  css_obj.replaceSync(css_text);
+  return css_obj;
+}
+
+/**
  * @param {HTMLElement} element
  * @param {(HTMLElement|string|DocumentFragment)[]|string|HTMLElement|DocumentFragment} childrenIn
  * @returns {HTMLElement}
@@ -95,8 +116,11 @@ export function addChildren(element, childrenIn) {
 
 /**@param {string} path */
 export function changeUrlPath(path) {
+  const reRenderEvent = new CustomEvent("rerender", {
+    detail: window.location.pathname,
+  });
   window.history.pushState("", "", path);
-  reRender();
+  window.dispatchEvent(reRenderEvent);
 }
 
 export function reRender() {
@@ -113,10 +137,8 @@ export function clearChildren(parrentElement) {
     document.querySelectorAll(parrentElement).forEach((element) => {
       element.innerHTML = "";
     });
-  } else if (parrentElement.shadowRoot) {
-    parrentElement.shadowRoot.innerHTML = "";
-    return parrentElement;
   } else {
+    if (parrentElement.shadowRoot) parrentElement.shadowRoot.innerHTML = "";
     parrentElement.innerHTML = "";
     return parrentElement;
   }
@@ -148,14 +170,22 @@ export async function simpleRoutesAsync(routes = {}) {
   for (let path in routes) {
     let url = new URLPattern({ pathname: path });
 
-    if (url.test(window.location.href))
-      return await routes[path](urlParams(url.exec(window.location.href)));
+    if (typeof routes[path] == "function") {
+      if (url.test(window.location.href))
+        return await routes[path](urlParams(url.exec(window.location.href)));
+    } else {
+      if (url.test(window.location.href)) {
+        let page = (await import(routes[path])).default;
+        if (await page)
+          return await page(urlParams(url.exec(window.location.href)));
+      }
+    }
   }
 }
 
 export function createImageFromArrayBuffer(
   arrayBuffer,
-  mimeType = "image/png"
+  mimeType = "image/png",
 ) {
   const blob = new Blob([arrayBuffer], { type: mimeType });
   const url = URL.createObjectURL(blob);

@@ -1,7 +1,9 @@
-import { createElement } from "../FastHTML.js";
-import SettingsStyle from "../../css/settings.css" assert { type: "css" };
+import { createElement, importCSS } from "../FastHTML.js";
 
-export default function Settings() {
+export default async function Settings() {
+  let SettingsStyle = await importCSS(
+    location.origin + "/assets/css/settings.css",
+  );
   return createElement("main", { style: SettingsStyle }, [
     createElement("div", {}),
   ]);
